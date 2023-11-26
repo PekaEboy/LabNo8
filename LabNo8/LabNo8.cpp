@@ -21,14 +21,46 @@ int main()
     //defk
     char word2[50];
     cin.getline(word2, 50);
-
-    char* slt = strtok(s, " .,-!?");
-
+    char p[500];
+    strcpy(p, s);
+    int np = strlen(p);
+    int begword[1000];
+    int begi = 0;
+    int jk = 0;
+    for (int i = 0; i <= np; i++) {
+        if (!(isalnum(p[i]))) {
+            p[i] = '\0';
+            if (strcmp(&p[begi], word1) == 0) {
+                begword[jk] = begi;
+                jk++;
+            }
+            begi = i + 1;
+        }
+    }
     int d = strlen(word2) - strlen(word1);
+    cout << endl;
     int k = 0;
-    int aj[1000];
+    char sf[1000];
+    int js = 0;
+    int jp = 0;
 
+    while (js < strlen(s)+1) {
+        if (js == begword[k]) {
+            for (int y = 0; y < strlen(word2); y++) {
+                sf[jp + y] = word2[y];
+            }
+            jp = jp + strlen(word2);
+            js = jp - d*(k+1);
+            k++;
+        }
+        else {
+            sf[jp] = s[js];
+            js++;
+            jp++;
+        }
+    }
     
+    cout << sf << endl;
 }
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
